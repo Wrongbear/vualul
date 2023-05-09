@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Курс валют</title>
+  </head>
+  <body>
+    <div id="exchange-rate"></div>
+    <script>
+      const exchangeRateUrl = "https://api.apilayer.com/currency_data/live?source=USD&currencies=AMD%2CRUB&apikey=bJIpqCiRbgUW19E2xXmsRj6H1WGlDyDu";
+
+      fetch(exchangeRateUrl)
+        .then(response => response.json())
+        .then(data => {
+          const rates = data.quotes;
+          const usdToAmd = rates.USDAMD.toFixed(2);
+          const usdToRub = rates.USDRUB.toFixed(2);
+          const exchangeRateText = `1 USD = ${usdToAmd} AMD = ${usdToRub} RUB`;
+          const exchangeRateDiv = document.getElementById("exchange-rate");
+          exchangeRateDiv.innerText = exchangeRateText;
+        })
+        .catch(error => console.error(error));
+    </script>
+  </body>
+</html>
